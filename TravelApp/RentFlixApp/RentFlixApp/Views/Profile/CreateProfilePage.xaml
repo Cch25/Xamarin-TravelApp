@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:system="clr-namespace:System;assembly=netstandard"
+             xmlns:abstractions="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions"
+             x:Class="RentFlixApp.Views.Profile.CreateProfilePage"
+             Title="Create profile">
+
+    <ScrollView>
+        <Grid ColumnSpacing="0" RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="AUTO" />
+                <RowDefinition Height="AUTO" />
+                <RowDefinition Height="AUTO" />
+                <RowDefinition Height="AUTO" />
+                <RowDefinition Height="AUTO" />
+                <RowDefinition Height="AUTO" />
+            </Grid.RowDefinitions>
+
+            <!--  header background  -->
+            <Image Aspect="AspectFill" Source="banner.png" />
+            <!--<Image Aspect="Fill" Margin="0,-1,0,-1" Source="CurvedMask.png" VerticalOptions="End" />-->
+
+            <!--  profile image  -->
+            <abstractions:CircleImage Grid.Row="0" 
+                                      HeightRequest="100" 
+                                      Aspect="AspectFill"
+                                      HorizontalOptions="Center" 
+                                      x:Name="AvatarImage"
+                                      Source="addAvatar.png"
+                                      TranslationY="50" 
+                                      VerticalOptions="End" 
+                                      WidthRequest="100">
+                <abstractions:CircleImage.GestureRecognizers>
+                    <TapGestureRecognizer
+                        Tapped="PickPhoto"
+                        NumberOfTapsRequired="1">
+                    </TapGestureRecognizer>
+                </abstractions:CircleImage.GestureRecognizers>
+            </abstractions:CircleImage>
+
+            <!--  Profile Name  -->
+            <StackLayout Grid.Row="1" Padding="0,50,0,00" HorizontalOptions="Center">
+                <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}"/>
+                <Label Style="{StaticResource ProfileNameLabel}" Text="{Binding FullName}" />
+                <Label Margin="0,-5" Style="{StaticResource ProfileTagLabel}" Text="{Binding Email}" />
+            </StackLayout>
+
+            <!--  Social Stats Section  -->
+            <Grid Grid.Row="2" Margin="0,30" ColumnSpacing="0" RowSpacing="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <StackLayout>
+                    <Label Style="{StaticResource StatsNumberLabel}" Text="0" />
+                    <Label Style="{StaticResource StatsCaptionLabel}" Text="Posts" />
+                </StackLayout>
+
+                <StackLayout Grid.Column="1">
+                    <Label Style="{StaticResource StatsNumberLabel}" Text="0" />
+                    <Label Style="{StaticResource StatsCaptionLabel}" Text="Stars" />
+                </StackLayout>
+
+                <StackLayout Grid.Column="2">
+                    <Label Style="{StaticResource StatsNumberLabel}" Text="{Binding DateOfBirth}" />
+                    <Label Style="{StaticResource StatsCaptionLabel}" Text="Date of birth" />
+                </StackLayout>
+            </Grid>
+
+            <!-- profile description -->
+            <ScrollView Grid.Row="3">
+                <StackLayout Orientation="Vertical">
+                    <Entry Text="{Binding FullName}"
+                       TextColor="Black" 
+                       PlaceholderColor="Teal"  
+                       Placeholder="Full Name"
+                       HorizontalOptions="FillAndExpand"/>
+                    <Label Text="Birth date" FontSize="15" TextColor="Teal"/>
+                    <DatePicker VerticalOptions="CenterAndExpand" 
+                            Date="{x:Static system:DateTime.Now}"
+                            DateSelected="DatePicker_OnDateSelected"
+                            MaximumDate="{x:Static system:DateTime.Now}">
+                        <DatePicker.Format>yyyy-MM-dd</DatePicker.Format>
+                        <DatePicker.MinimumDate>
+                            <system:DateTime x:FactoryMethod="Parse">
+                                <x:Arguments>
+                                    <x:String>Jan 1 1900</x:String>
+                                </x:Arguments>
+                            </system:DateTime>
+                        </DatePicker.MinimumDate>
+                    </DatePicker>
+                    <Label Text="About me" FontSize="15" TextColor="Teal"/>
+                    <Editor Text="{Binding AboutMe}"
+                            FontSize="15" TextColor="Teal"
+                            VerticalOptions="FillAndExpand"
+                            HeightRequest="100"
+                            Keyboard="Chat"
+                            HorizontalOptions="FillAndExpand"/>
+                </StackLayout>
+            </ScrollView>
+
+            <!--  follow button  -->
+            <Button Grid.Row="4" 
+                    Margin="20,20,20,0"
+                    Style="{StaticResource EditButton}"
+                    Text="Create profile" 
+                    Clicked="CreateUserProfile"
+                    />
+            <Label Grid.Row="5" Margin="0,0,0,20" Text="Not now" VerticalOptions="EndAndExpand"
+                   HorizontalOptions="Center" 
+                   TextColor="Teal">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer
+                        Tapped="Handle_Clicked"
+                        NumberOfTapsRequired="1" />
+                </Label.GestureRecognizers>
+            </Label>
+        </Grid>
+    </ScrollView>
+</ContentPage>

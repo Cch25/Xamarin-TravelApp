@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:abstractions="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions"
+             x:Class="RentFlixApp.Views.Story.ReadStory.ReadCompleteStory">
+    <ContentPage.Content>
+        <ScrollView>
+            <Grid ColumnSpacing="0" RowSpacing="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="AUTO" />
+                    <RowDefinition Height="AUTO" />
+                    <RowDefinition Height="AUTO" />
+                    <RowDefinition Height="AUTO" />
+                    <RowDefinition Height="AUTO" />
+                    <RowDefinition Height="AUTO" />
+                </Grid.RowDefinitions>
+
+                <!--  banner background  -->
+                <Image Grid.Row ="0" 
+                       x:Name="BannerImage"
+                       Source="{Binding BackImage}"
+                       WidthRequest="200" 
+                       HeightRequest="200" 
+                       Aspect="AspectFill"
+                       HorizontalOptions="Fill" >
+                </Image>
+
+                <StackLayout Grid.Row="1" Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="End" >
+                
+                    <Label FontAttributes="None"
+                           HorizontalTextAlignment="Center"
+                           VerticalTextAlignment="Center"
+                           TranslationY="5"
+                           FontSize="22"
+                           Text="{Binding HeadTitle}" 
+                           Style="{StaticResource ProfileTagLabel}" 
+                           TextColor="Black">
+                    </Label>
+                </StackLayout>
+                <!--  Profile Creation  -->
+                <StackLayout Grid.Row="2" Padding="0,3,0,0" Orientation="Vertical">
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
+                       
+                        <Label FontAttributes="None"
+                               HorizontalTextAlignment="Center"
+                               VerticalTextAlignment="Center"
+                               FontSize="16"
+                               Text="{Binding Region}" 
+                               Style="{StaticResource StatsNumberLabel}" 
+                               TextColor="Black">
+                        </Label>
+                        <Label FontAttributes="None"
+                               HorizontalTextAlignment="Center"
+                               VerticalTextAlignment="Center"
+                               FontSize="16"
+                               Text="{Binding Location, StringFormat='- {0}'}" 
+                               Style="{StaticResource StatsNumberLabel}" 
+                               TextColor="Black">
+                        </Label>
+                    </StackLayout>
+
+                    <StackLayout Padding="4, 20, 0, 10">
+
+                        <StackLayout Orientation="Horizontal">
+                            <abstractions:CircleImage 
+                                Source="{Binding UserImage}"
+                                WidthRequest="50"
+                                HeightRequest="50"
+                                >
+                                <abstractions:CircleImage.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="UserImageTapped"></TapGestureRecognizer>
+                                </abstractions:CircleImage.GestureRecognizers>
+                            </abstractions:CircleImage>
+                            <StackLayout Orientation="Vertical">
+                                <Label Text="{Binding UserFullName, StringFormat='{0} wrote: '}" 
+                                   VerticalTextAlignment="Center"
+                                   VerticalOptions="Center"
+                                   FontSize="18" TextColor="Teal" >
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="UserNameTapped"></TapGestureRecognizer>
+                                    </Label.GestureRecognizers>
+                                </Label>
+                                    <Label Text="{Binding DatePosted}" 
+                                   VerticalTextAlignment="Start"
+                                   VerticalOptions="Start"
+                                   TranslationY="-3"
+                                   FontSize="14" TextColor="DimGray"/>
+                            </StackLayout>
+                        </StackLayout>
+
+                        <StackLayout Margin="5">
+                            <Label Text="{Binding StoryText, StringFormat='˶{0}   ̋ '}"
+                                FontSize="16"
+                                FontAttributes="Italic"
+                                Style="{StaticResource StoryMainBodyLabel}"
+                                VerticalOptions="FillAndExpand"
+                                HorizontalTextAlignment="Start"
+                                HorizontalOptions="FillAndExpand"/>
+                            <!--<StackLayout x:Name="StoryBehind"
+                                         HorizontalOptions="FillAndExpand"
+                                         VerticalOptions="FillAndExpand">
+                            </StackLayout>-->
+                            <Label 
+                               HorizontalOptions="FillAndExpand"
+                               HorizontalTextAlignment="Center"
+                               VerticalOptions="End"
+                               FontSize="16"
+                               FontAttributes ="Italic"
+                               Margin="5, 0, 0, 10"
+                               Text="{Binding Rating, StringFormat='My grade is: {0} out of 10.'}" 
+                               Style="{StaticResource StoryMainBodyLabel}" >
+                            </Label>
+                        </StackLayout>
+                    </StackLayout>
+
+                </StackLayout>
+
+                <StackLayout Grid.Row="3" Orientation="Horizontal">
+                    <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" Color="BlueViolet"></ActivityIndicator>
+                    <Image x:Name="LikePostImage" HorizontalOptions="Start"
+                               WidthRequest="25" HeightRequest="25"
+                               Margin="10,0,0,0" Source="dislikedButton.png">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="HeartClicked"></TapGestureRecognizer>
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <Label x:Name="LikePostLabel" Text="Like" Style="{StaticResource StoryMainBodyLabel}">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="LikedClicked"></TapGestureRecognizer>
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
+            </Grid>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

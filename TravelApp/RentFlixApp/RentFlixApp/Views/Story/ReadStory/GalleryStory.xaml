@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:forms="clr-namespace:Xamarin.Forms;assembly=Xamarin.Forms.CarouselView"
+             x:Class="RentFlixApp.Views.Story.ReadStory.GalleryStory"
+             BackgroundColor="Black">
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical">
+
+            <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" Color="BlueViolet"/>
+
+            <forms:CarouselView x:Name="MainCarouselView" ItemSelected="PictureTouched">
+                <forms:CarouselView.ItemTemplate>
+                    <DataTemplate>
+                        <Image Source="{Binding FullPath}" Aspect="AspectFit"  />
+                    </DataTemplate>
+                </forms:CarouselView.ItemTemplate>
+            </forms:CarouselView>
+            
+            <BoxView HorizontalOptions="Fill" VerticalOptions="Start"  HeightRequest="1" BackgroundColor="White"/>
+            <Label x:Name="ImageDescription" FontSize="16" Style="{StaticResource StatsNumberLabel}" TextColor="White"/>
+            
+        </StackLayout>
+
+    </ContentPage.Content>
+</ContentPage>

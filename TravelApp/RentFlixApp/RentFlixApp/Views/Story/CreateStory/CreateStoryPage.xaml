@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RentFlixApp.Views.Story.CreateStory.CreateStoryPage"
+             Title="Create story">
+    <ContentPage.Content>
+        <ScrollView>
+            <Grid ColumnSpacing="0" RowSpacing="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="AUTO" />
+                    <RowDefinition Height="AUTO" />
+                    <RowDefinition Height="AUTO" />
+                    <RowDefinition Height="AUTO" />
+                    <RowDefinition Height="AUTO" />
+                    <RowDefinition Height="AUTO" />
+                </Grid.RowDefinitions>
+
+                <!--  banner background  -->
+                <Image Grid.Row ="0" 
+                       x:Name="BannerImage"
+                       Source="banner.jpg"
+                       WidthRequest="170" 
+                       HeightRequest="170" 
+                       Aspect="AspectFill"
+                       HorizontalOptions="Fill" >
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer 
+                            Tapped="ChooseBanner"
+                        NumberOfTapsRequired="1">
+                        </TapGestureRecognizer>
+                    </Image.GestureRecognizers>
+                </Image>
+                <Label HorizontalOptions="End" VerticalOptions="End" FontSize="14" TextColor="White" Text="+Upload Cover" TranslationY="-47" ></Label>
+                <BoxView HorizontalOptions="Fill" VerticalOptions="End" HeightRequest="45" BackgroundColor="#66000000"></BoxView>
+                <StackLayout Grid.Row="1" Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="End" >
+                    <Label FontAttributes="None"
+                           HorizontalTextAlignment="Center"
+                           VerticalTextAlignment="Center"
+                           TranslationY="-30"
+                           FontSize="22"
+                           Text="{Binding HeadTitle}" 
+                           Style="{StaticResource ProfileTagLabel}" 
+                           TextColor="White">
+                    </Label>
+                </StackLayout>
+                <!--  Profile Creation  -->
+                <StackLayout Grid.Row="2" Padding="5,3,0,0" Orientation="Vertical">
+                    <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" Color="BlueViolet"/>
+                    <Entry Text="{Binding HeadTitle}"
+                           TextColor="Black" 
+                           PlaceholderColor="Teal"  
+                           Placeholder="Title"
+                           HorizontalOptions="FillAndExpand"/>
+                    <StackLayout Orientation="Horizontal">
+                        <Entry Text="{Binding Region}"
+                               TextColor="Black" 
+                               PlaceholderColor="Teal"  
+                               Placeholder="Region"
+                               HorizontalOptions="FillAndExpand"/>
+                        <Entry Text="{Binding Location}"
+                               TextColor="Black" 
+                               PlaceholderColor="Teal"  
+                               Placeholder="Location"
+                               HorizontalOptions="FillAndExpand"/>
+                    </StackLayout>
+                    <Label Text="My Story" FontSize="15" TextColor="Teal"/>
+                    <Editor Text="{Binding StoryText}"
+                            FontSize="15" TextColor="Teal"
+                            VerticalOptions="FillAndExpand"
+                            HeightRequest="140"
+                            Keyboard="Chat"
+                            HorizontalOptions="FillAndExpand"/>
+                    <StackLayout Orientation="Horizontal">
+                        <Label FontAttributes="None"
+                               HorizontalOptions="FillAndExpand"
+                               VerticalOptions="End"
+                               HorizontalTextAlignment="Center"
+                               FontSize="20"
+                               Text="My grade" 
+                               TranslationY="-5"
+                               Style="{StaticResource ProfileTagLabel}" 
+                               TextColor="Teal">
+                        </Label>
+                        <Entry Text="{Binding Rating}"
+                               TextColor="Black" 
+                               PlaceholderColor="Teal"  
+                               Placeholder="out of 10"
+                               Keyboard="Numeric"
+                               HorizontalOptions="FillAndExpand"/>
+
+                    </StackLayout>
+                </StackLayout>
+
+                <StackLayout Grid.Row="3">
+                    <Button  
+                        Margin="20,20,20,0"
+                        Style="{StaticResource EditButton}"
+                        Text="Save Story" 
+                        Clicked="CreateStory"/>
+                    <Label Text="*Your story will be saved and you'll redirected to photo gallery" VerticalOptions="End"
+                           HorizontalOptions="Center" 
+                           FontSize="12"
+                           Style="{StaticResource ProfileTagLabel}">
+                    </Label>
+                </StackLayout>
+            </Grid>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

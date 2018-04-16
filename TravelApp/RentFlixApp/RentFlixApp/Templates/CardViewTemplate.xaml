@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:abstractions="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions"
+             x:Class="RentFlixApp.Templates.CardViewTemplate">
+    <Frame IsClippedToBounds="True"
+         HasShadow="True"
+         BackgroundColor="White" >
+        <Frame.OutlineColor>
+            <OnPlatform x:TypeArguments="Color"
+                  Android="Gray"
+                  iOS="Gray"/>
+        </Frame.OutlineColor>
+        <Frame.Margin>
+            <OnPlatform x:TypeArguments="Thickness">
+                <OnPlatform.Android>7</OnPlatform.Android>
+                <OnPlatform.iOS>7</OnPlatform.iOS>
+            </OnPlatform>
+        </Frame.Margin>
+        <Frame.Padding>
+            <OnPlatform x:TypeArguments="Thickness"
+                  Android="5" iOS="5"/>
+        </Frame.Padding>
+
+        <StackLayout Orientation="Horizontal">
+
+            <Grid VerticalOptions="CenterAndExpand"
+            Padding="0"
+            HorizontalOptions="FillAndExpand"
+            BackgroundColor="Transparent">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0">
+                    <StackLayout Orientation="Horizontal">
+                        <abstractions:CircleImage Source="{Binding  ProfileImage}" WidthRequest="40" HeightRequest="40" Aspect="AspectFill" HorizontalOptions="Fill" />
+                        <StackLayout Orientation="Vertical">
+                            <Label Text="{Binding ProfileName}" FontSize="18" VerticalTextAlignment="Center"/>
+                            <Label Text="{Binding DatePosted}" VerticalTextAlignment="Start" TranslationY="-5" />
+                        </StackLayout>
+                    </StackLayout>
+                </Grid>
+                <Grid Grid.Row="1">
+                    <Image Source="{Binding BannerImage}" WidthRequest="170" HeightRequest="170" Aspect="AspectFill" HorizontalOptions="Fill" />
+                    <BoxView HorizontalOptions="Fill" VerticalOptions="End" HeightRequest="45" BackgroundColor="#66000000"></BoxView>
+                    <StackLayout Grid.Row="0" Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="End" >
+                        <Label FontAttributes="None"
+                           HorizontalTextAlignment="Center"
+                           VerticalTextAlignment="Center"
+                           TranslationY="-10"
+                           FontSize="22"
+                           Text="{Binding HeadTitle , Mode = TwoWay}" 
+                           Style="{StaticResource ProfileTagLabel}" 
+                           TextColor="White">
+                        </Label>
+                    </StackLayout>
+                </Grid>
+                <Grid Grid.Row="2">
+                    <StackLayout Orientation="Horizontal">
+                        <Label FontAttributes="None"
+                       HorizontalTextAlignment="Start"
+                       VerticalTextAlignment="Start"
+                       Text="{Binding HeadLines, Mode = TwoWay}" FontSize="15" TextColor="DimGray">
+                        </Label>
+                    </StackLayout>
+                </Grid>
+
+                <Grid Grid.Row="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <StackLayout HorizontalOptions="CenterAndExpand" Orientation="Horizontal" Grid.Column="0">
+                        <Image Source="comments.png" WidthRequest="20" HeightRequest="20" />
+                        <Label Style="{StaticResource StatsNumberLabel}" Text="{Binding TotalComments}" />
+                    </StackLayout>
+
+                    <StackLayout   HorizontalOptions="CenterAndExpand" Orientation="Horizontal" Grid.Column="1">
+                        <Image Source="likes.png" WidthRequest="23" HeightRequest="23"/>
+                        <Label Style="{StaticResource StatsNumberLabel}" Text="{Binding TotalLikes}" />
+                    </StackLayout>
+
+                    <StackLayout  HorizontalOptions="CenterAndExpand" Orientation="Horizontal" Grid.Column="2">
+                        <Image Source="totalPhotos.png" WidthRequest="20" HeightRequest="20"/>
+                        <Label Style="{StaticResource StatsNumberLabel}" Text="{Binding TotalPictures}" />
+                    </StackLayout>
+                </Grid>
+            </Grid>
+        </StackLayout>
+    </Frame>
+</ContentView>
+

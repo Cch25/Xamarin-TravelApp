@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RentFlixApp.Views.Story.CreateStory.ViewFullPhoto">
+
+    <RelativeLayout>
+        <Image Source="{Binding ImagePath}" 
+               Aspect="AspectFill"
+               RelativeLayout.WidthConstraint=
+               "{ConstraintExpression Type=RelativeToParent, Property=Width}"
+               RelativeLayout.HeightConstraint=
+               "{ConstraintExpression Type=RelativeToParent, Property=Height}"/>
+        <Grid RelativeLayout.WidthConstraint=
+              "{ConstraintExpression Type=RelativeToParent, Property=Width}"
+              RelativeLayout.HeightConstraint=
+              "{ConstraintExpression Type=RelativeToParent, Property=Height}">
+
+            <BoxView HorizontalOptions="Fill" VerticalOptions="Start" TranslationY="30" HeightRequest="30" BackgroundColor="#66000000"></BoxView>
+            <StackLayout Orientation="Horizontal">
+                <Image Source="backArrow.png"
+                    WidthRequest="30"
+                    HeightRequest="30"
+                    HorizontalOptions="Start"
+                    TranslationY="30"
+                    VerticalOptions="Start">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer
+                        Tapped="GoBackToGallery"
+                        NumberOfTapsRequired="1">
+                        </TapGestureRecognizer>
+                    </Image.GestureRecognizers>
+                </Image>
+                <Label Text="Back to Gallery" TextColor="White" FontSize="17" TranslationY="30"></Label>
+            </StackLayout>
+
+            <BoxView HorizontalOptions="Fill" VerticalOptions="End" HeightRequest="74" BackgroundColor="#66000000"></BoxView>
+            <BoxView HorizontalOptions="Fill" VerticalOptions="End" HeightRequest="1" TranslationY="-75" BackgroundColor="White"></BoxView>
+            <Label Text="{Binding Description}" 
+                   VerticalOptions="End"
+                   TranslationY="-40"
+                   FontSize="16"
+                   TextColor="White"
+                   />
+        </Grid>
+    </RelativeLayout>
+</ContentPage>

@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:abstractions="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions"
+             x:Class="RentFlixApp.Templates.CardCommentsTemplate">
+    <Frame IsClippedToBounds="True"
+         HasShadow="True"
+         BackgroundColor="White" >
+        <Frame.OutlineColor>
+            <OnPlatform x:TypeArguments="Color"
+                  Android="Gray"
+                  iOS="Gray"/>
+        </Frame.OutlineColor>
+        <Frame.Margin>
+            <OnPlatform x:TypeArguments="Thickness">
+                <OnPlatform.Android>7</OnPlatform.Android>
+                <OnPlatform.iOS>7</OnPlatform.iOS>
+            </OnPlatform>
+        </Frame.Margin>
+        <Frame.Padding>
+            <OnPlatform x:TypeArguments="Thickness"
+                  Android="5" iOS="5"/>
+        </Frame.Padding>
+
+        <StackLayout Orientation="Horizontal">
+            <Grid VerticalOptions="CenterAndExpand"
+            Padding="0"
+            HorizontalOptions="FillAndExpand"
+            BackgroundColor="Transparent">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0">
+                    <StackLayout Orientation="Horizontal">
+                        <abstractions:CircleImage Source="{Binding AvatarImage}" WidthRequest="40" HeightRequest="40" Aspect="AspectFill" HorizontalOptions="Fill" />
+                        <StackLayout Orientation="Vertical">
+                            <Label Text="{Binding FullName}"></Label>
+                            <Label Text="{Binding DatePosted}" TranslationY="-5"></Label>
+                        </StackLayout>
+                    </StackLayout>
+                    <BoxView HorizontalOptions="Fill" VerticalOptions="End" HeightRequest="1" BackgroundColor="#66000000"></BoxView>
+                </Grid>
+                <Grid Grid.Row="1">
+                    <StackLayout Orientation="Horizontal">
+                        <Label FontAttributes="None"
+                       HorizontalTextAlignment="Start"
+                       VerticalTextAlignment="Start"
+                       Text="{Binding CommentText, Mode = TwoWay}" FontSize="15" TextColor="DimGray">
+                        </Label>
+                    </StackLayout>
+                </Grid>
+            </Grid>
+        </StackLayout>
+    </Frame>
+</ContentView>

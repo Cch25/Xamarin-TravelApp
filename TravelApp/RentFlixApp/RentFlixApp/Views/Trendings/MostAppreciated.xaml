@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:RentFlixApp.ViewModels;assembly=RentFlixApp"
+             xmlns:templates="clr-namespace:RentFlixApp.Templates;assembly=RentFlixApp"
+             x:Class="RentFlixApp.Views.Trendings.MostAppreciated">
+   
+    <ContentPage.BindingContext>
+        <viewModels:CardDataViewModel/>
+    </ContentPage.BindingContext>
+
+
+    <StackLayout Orientation="Vertical">
+
+        <ActivityIndicator IsRunning="{Binding IsBusy}"
+                           IsVisible="{Binding IsBusy}"
+                           Color="BlueViolet"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Center"/>
+
+        <ListView x:Name="ListView" SelectedItem="{Binding SelectedItem,Mode=TwoWay}" 
+                  RowHeight="150" 
+                  ItemsSource="{Binding ArrangedDataCollection}" HasUnevenRows="True"  
+                  IsPullToRefreshEnabled="True"
+                  Refreshing="RefreshList"
+                  ItemTapped="ListView_OnItemTappedtemTapped"
+                  CachingStrategy="RecycleElement">
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <templates:CardViewTemplate/>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+
+        </ListView>
+    </StackLayout>
+
+</ContentPage>

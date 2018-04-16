@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:abstractions="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions"
+             xmlns:system="clr-namespace:System;assembly=netstandard"
+             x:Class="RentFlixApp.Views.Profile.UpdateProfilePage"
+             Title="Update profile">
+    <ScrollView>
+        <Grid ColumnSpacing="0" RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="AUTO" />
+                <RowDefinition Height="AUTO" />
+                <RowDefinition Height="AUTO" />
+                <RowDefinition Height="AUTO" />
+                <RowDefinition Height="AUTO" />
+                <RowDefinition Height="AUTO" />
+            </Grid.RowDefinitions>
+
+            <!--  header background  -->
+            <Image Aspect="AspectFill" Source="banner.png" />
+            <!--<Image Aspect="Fill" Margin="0,-1,0,-1" Source="CurvedMask.png" VerticalOptions="End" />-->
+
+            <!--  profile image  -->
+            <ActivityIndicator Grid.Row="0" IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}"/>
+              <!--profile image-->  
+            <abstractions:CircleImage Grid.Row="0" 
+                                      HeightRequest="100" 
+                                      Aspect="AspectFill"
+                                      HorizontalOptions="Center" 
+                                      x:Name="AvatarImage"
+                                      Source="{Binding Avatar}" 
+                                      TranslationY="50" 
+                                      VerticalOptions="End" 
+                                      WidthRequest="100">
+                <abstractions:CircleImage.GestureRecognizers>
+                    <TapGestureRecognizer
+                        Tapped="PickPhoto"
+                        NumberOfTapsRequired="1">
+                    </TapGestureRecognizer>
+                </abstractions:CircleImage.GestureRecognizers>
+            </abstractions:CircleImage>
+
+            <!--  Profile Name  -->
+            <StackLayout Grid.Row="1" Padding="0,50,0,00" HorizontalOptions="Center">
+                <Label Style="{StaticResource ProfileNameLabel}" Text="{Binding FullName}" />
+            </StackLayout>
+
+             <!--profile description--> 
+            <ScrollView Grid.Row="3">
+                <StackLayout Orientation="Vertical">
+                    <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}"/>
+                    <Entry Text="{Binding FullName}"
+                       TextColor="Black" 
+                       PlaceholderColor="Teal"  
+                       Placeholder="Full Name"
+                       HorizontalOptions="FillAndExpand"/>
+                    <Label Text="Birth date" FontSize="15" TextColor="Teal"/>
+                    <DatePicker VerticalOptions="CenterAndExpand" 
+                            Date="{Binding DateOfBirth}"
+                            DateSelected="DatePicker_OnDateSelected"
+                            MaximumDate="{x:Static system:DateTime.Now}">
+                        <DatePicker.Format>yyyy-MM-dd</DatePicker.Format>
+                        <DatePicker.MinimumDate>
+                            <system:DateTime x:FactoryMethod="Parse">
+                                <x:Arguments>
+                                    <x:String>Jan 1 1900</x:String>
+                                </x:Arguments>
+                            </system:DateTime>
+                        </DatePicker.MinimumDate>
+                    </DatePicker>
+                    <Label Text="About me" FontSize="15" TextColor="Teal"/>
+                    <Editor Text="{Binding AboutMe}"
+                            FontSize="15" TextColor="Teal"
+                            VerticalOptions="FillAndExpand"
+                            HeightRequest="100"
+                            Keyboard="Chat"
+                            HorizontalOptions="FillAndExpand"/>
+                </StackLayout>
+            </ScrollView>
+
+              <!--follow button-->
+            <Button Grid.Row="4" 
+                    Margin="20,20,20,0"
+                    Style="{StaticResource EditButton}"
+                    Text="Update profile" 
+                    Clicked="UpdateProfile"
+                    />
+        </Grid>
+    </ScrollView>
+</ContentPage>

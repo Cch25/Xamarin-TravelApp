@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:templates="clr-namespace:RentFlixApp.Templates;assembly=RentFlixApp"
+             x:Class="RentFlixApp.Views.Story.CreateStory.CreateGalleryStory">
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical" VerticalOptions="Fill">
+            <Label Text="Drag to refresh"
+                   x:Name="InfoLabel"
+                   VerticalOptions="Start"
+                   HorizontalTextAlignment="Center"
+                   VerticalTextAlignment="Center"
+                   BackgroundColor="Transparent"
+                   HorizontalOptions="CenterAndExpand" />
+            <ActivityIndicator IsRunning="{Binding IsBusy}"
+                           IsVisible="{Binding IsBusy}"
+                           Color="BlueViolet"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Center"/>
+
+            <ListView x:Name="ListView" SelectedItem="{Binding SelectedItem,Mode=TwoWay}" 
+                  RowHeight="150" 
+                  ItemsSource="{Binding GalleryList}" HasUnevenRows="True"  
+                  IsPullToRefreshEnabled="True"
+                  Refreshing="RefreshList"
+                  ItemTapped="ItemTap"
+                  CachingStrategy="RecycleElement">
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <templates:CardGalleryTemplate/>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+
+            </ListView>
+            <StackLayout Orientation="Horizontal" >
+               
+                <Label Text="Done" 
+                   Margin="10,0,0,0"
+                   HorizontalOptions="Center" 
+                   FontSize="18"
+                   VerticalTextAlignment="Center"
+                   HorizontalTextAlignment="Start"
+                   TextColor="Black">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer
+                        Tapped="DoneWithStory"
+                        NumberOfTapsRequired="1" />
+                    </Label.GestureRecognizers>
+                </Label>
+                <Button       
+                    CornerRadius="20"
+                    Margin="10,0,0,0"
+                    TextColor="White"
+                    BackgroundColor="DodgerBlue"
+                    Text="Upload photo"
+                    HorizontalOptions="FillAndExpand"
+                    Clicked="UploadPhotos"/>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
